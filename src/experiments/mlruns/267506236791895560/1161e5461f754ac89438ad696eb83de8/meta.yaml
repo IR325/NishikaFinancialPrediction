@@ -1,0 +1,15 @@
+artifact_uri: /Users/ryusuke/Downloads/study/data_competition/nishika_金融時系列予測/NishikaFinancialPrediction/src/experiments/../../mlflow/artifacts/1161e5461f754ac89438ad696eb83de8/artifacts
+end_time: 1693125619764
+entry_point_name: ''
+experiment_id: '267506236791895560'
+lifecycle_stage: active
+run_id: 1161e5461f754ac89438ad696eb83de8
+run_name: capable-dove-262
+run_uuid: 1161e5461f754ac89438ad696eb83de8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1693125619742
+status: 4
+tags: []
+user_id: ryusuke

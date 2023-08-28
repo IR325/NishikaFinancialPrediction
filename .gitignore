@@ -2,3 +2,7 @@ data/
 .DS_store
 .ipynb_checkpoints/
 results/
+mlflow/
+models/
+experiments/mlruns/
+*.pyc

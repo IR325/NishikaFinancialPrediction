@@ -1,0 +1,16 @@
+artifact_uri: /Users/ryusuke/Downloads/study/data_competition/nishika_金融時系列予測/NishikaFinancialPrediction/src/experiments/../../mlflow/artifacts/66f3823760b84f3995b8635bc329515d/artifacts
+deleted_time: 1693125190320
+end_time: 1693124828913
+entry_point_name: ''
+experiment_id: '267506236791895560'
+lifecycle_stage: deleted
+run_id: 66f3823760b84f3995b8635bc329515d
+run_name: merciful-ant-329
+run_uuid: 66f3823760b84f3995b8635bc329515d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1693124828883
+status: 4
+tags: []
+user_id: ryusuke

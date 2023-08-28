@@ -1,0 +1,17 @@
+split: 
+  split_type: shuffle
+  valid_size: 0.2
+  test_size: 0.2
+features:
+  - group
+model:
+  model_name: lightgbm
+  params:
+    boosting_type: gbdt
+    objective: regression
+    metric: rmse
+    num_leaves: 16
+    learning_rate: 0.1
+    n_estimators: 100000
+    random_state: 0
+save_path: ../../results/20230827_result.csv

@@ -1,0 +1,48 @@
+# 各notebook概要
+- 20230816_eda.ipynb
+    - 概要
+        - EDA・学習・予測・結果保存までを行うnotebook
+        - LightGBMの評価指標を間違えてコサイン類似度にしていることが問題点（カスタムメトリックの備忘録として残しておく）
+- 20230817_fix_metric.ipynb
+    - 概要
+        - metricをコサイン類似度からRMSEに変更
+        - なぜvalidに対する精度とtestに対する制度がここまで乖離するのだろうか
+    - 結果
+        - 8/23現在，このnotebookを利用してシンプルにLightGBMをした場合の精度が最も高い
+- 20230817_tuning_hp.ipynb
+    - 概要
+        - optunaのHPチューニングできるLightGBMを利用
+    - 結果
+        - tuningnに対する時間がかかりすぎる
+- 20230818_pca.ipynb
+    - 概要
+        - PCAによる次元削減を行いLightGBMで予測
+    - 結果
+        - ある程度の精度が出ることを確認した
+        - 特徴量をTop20->Top30にしたら精度が低下した．なぜだろう
+- 20230818_Kfold.ipynb
+    - 概要
+        - トピックをもとにridge回帰の予測を行った
+        - MyKFold/cross_val_predictを利用して予測精度を確認
+            - MyKFoldがこれでいいのかという点については，疑問が残る
+            - 隣接しているグループを除いてはいるが，時系列の前後関係を考慮できていないのではなかろうか
+- 20230818_TimeSeriesSplit.ipynb
+    - 概要
+        - 時系列の前後関係を考慮したcross_val_predを作成
+        - 考慮しない場合と，あまりバリデーションの精度が変わらない．．なぜだろう
+- 20230820_SelectKBest.ipynb
+    - 概要
+        - SelectKBestを利用して，特徴量抽出
+    - 結果
+        - 精度は低い（全データを利用していないからか）
+- 20230821_Dask.ipynb
+    - 概要
+        - 使い方がわからなかった．．
+- 20230823_lightgbm_feature_selection.ipynb
+    - 概要
+        - 8/23現在のベストモデルを用いて，feature_importanceのtop100特徴量を利用
+    - 結果
+        - validのスコアは高いが，テストデータの精度が低い
+        - validに関するリークがある感じかな
+
+ 
