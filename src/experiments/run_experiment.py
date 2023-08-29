@@ -41,7 +41,8 @@ def main(cfg):
     y_test_pred = model.predict(ds.X_test)
     save_results(cfg, ds.id_test, y_test_pred)
     # 保存
-    save_with_mlflow(cfg, model, metric)
+    if cfg.track_with_mlflow():
+        save_with_mlflow(cfg, model, metric)
 
 
 if __name__ == "__main__":

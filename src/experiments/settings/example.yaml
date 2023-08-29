@@ -12,6 +12,9 @@ model:
     metric: rmse
     num_leaves: 16
     learning_rate: 0.1
-    n_estimators: 100000
+    n_estimators: 10
     random_state: 0
-save_path: ../../results/20230827_result.csv
+mlflow: True
+run_name: test
+model_save_path: model
+csv_save_path: ../../results/test.csv

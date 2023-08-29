@@ -7,6 +7,7 @@ from data.make_dataset import Dataset
 def make_features(cfg: Config, ds: Dataset):
     if "group" in cfg["features"]:
         ds = _add_group_features(ds)
+    ds = _drop_id(ds)
     return ds
 
 
@@ -19,4 +20,12 @@ def _add_group_features(ds):
     ds.X_valid = _group_features(ds.X_valid)
     ds.X_eval = _group_features(ds.X_eval)
     ds.X_test = _group_features(ds.X_test)
+    return ds
+
+
+def _drop_id(ds):
+    ds.X_train = ds.X_train.drop(columns=["id"])
+    ds.X_valid = ds.X_valid.drop(columns=["id"])
+    ds.X_eval = ds.X_eval.drop(columns=["id"])
+    ds.X_test = ds.X_test.drop(columns=["id"])
     return ds

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import yaml
 
 
@@ -19,5 +21,18 @@ class Config:
     def get_model_info(self):
         return self.cfg["model"]["model_name"], self.cfg["model"]["params"]
 
-    def model_info_for_mlflow(self):
-        return self.cfg["model"]["model_name"], self.cfg["model"]["params"]
+    def experiment_settings(self):
+        return (
+            self.cfg["model"]["model_name"],
+            self.cfg["model"]["params"],
+            self.cfg["features"],
+        )
+
+    def track_with_mlflow(self):
+        return self.cfg["mlflow"]
+
+    def get_model_save_path(self):
+        return self.cfg["model_save_path"]
+
+    def get_csv_save_path(self):
+        return self.cfg["csv_save_path"]
