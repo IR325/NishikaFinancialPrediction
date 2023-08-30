@@ -12,9 +12,9 @@ model:
     metric: rmse
     num_leaves: 16
     learning_rate: 0.1
-    n_estimators: 10
+    n_estimators: 100000
     random_state: 0
 mlflow: True
-run_name: test
+run_name: 20230830_default_lightgbm_60percent # 要変更
 model_save_path: model
-csv_save_path: ../../results/test.csv
+csv_save_path: ../../results/20230830_lightgbm_ver2.csv # 要変更
