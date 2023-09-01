@@ -16,7 +16,8 @@ from config.config import Config
 from data.make_dataset import split_data
 from features.make_features import make_features
 from metrics.metrics import cosine_similarity
-from models.models import train_model
+from models.predict import predict
+from models.train import train
 from results.mlflow import save_with_mlflow
 from results.save_result import save_results
 
@@ -33,12 +34,12 @@ def main(cfg):
     # 特徴量選択・作成
     ds = make_features(cfg, ds)
     # モデル作成
-    model = train_model(cfg, ds.X_train, ds.y_train, ds.X_valid, ds.y_valid)
+    model = train(cfg, ds.X_train, ds.y_train, ds.X_valid, ds.y_valid)
     # 精度確認
-    y_eval_pred = model.predict(ds.X_eval)
+    y_eval_pred = predict(ds.X_eval)
     metric = cosine_similarity(ds.y_eval, y_eval_pred)
     # 本番データの予測
-    y_test_pred = model.predict(ds.X_test)
+    y_test_pred = predict(ds.X_test)
     save_results(cfg, ds.id_test, y_test_pred)
     # 保存
     if cfg.track_with_mlflow():
