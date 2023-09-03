@@ -1,0 +1,21 @@
+split: 
+  split_type: shuffle
+  valid_size: 0.1
+  test_size: 0.1
+features:
+  - group
+model:
+  model_name: lightgbm_classifier
+  params:
+    boosting_type: gbdt
+    objective: multiclass
+    num_class: 10
+    metric: multi_logloss # モデルはクラスを返すのにloglossでなぜ動くのか？内部でpredict_probaを計算している？
+    num_leaves: 16
+    learning_rate: 0.1
+    n_estimators: 100000
+    random_state: 0
+mlflow: True
+run_name: 20230902_lightgbm_classifier_ver2 # 要変更
+model_save_path: model
+csv_save_path: ../../results/20230902_lightgbm_classifier_ver2.csv # 要変更

@@ -56,7 +56,7 @@ def _log_metrics(metrics):
 def _log_model(cfg, model):
     model_name, _, _ = cfg.experiment_settings()
     save_path = cfg.get_model_save_path()
-    if model_name == "lightgbm":
+    if model_name == "lightgbm_classifier" or model_name == "lightgbm_regressor":
         mlflow.lightgbm.log_model(lgb_model=model, artifact_path=save_path)
     else:
         mlflow.sklearn.log_model("model", model)
