@@ -1,0 +1,22 @@
+# group特徴量を追加した回帰モデル
+split: 
+  split_type: shuffle
+  valid_size: 0.2
+  test_size: 0.2
+features:
+model:
+  model_name: lightgbm_classifier
+  params:
+    boosting_type: gbdt
+    objective: multiclass
+    metric: multi_logloss
+    num_class: 10
+    num_leaves: 31
+    learning_rate: 0.1
+    n_estimators: 100000
+    random_state: 0
+post_process:
+mlflow: True
+experiment_name: lightgbm_comparison
+run_name: classifier_baseline # 要変更
+model_save_path: model

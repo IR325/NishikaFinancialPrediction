@@ -1,0 +1,22 @@
+# group特徴量を追加した回帰モデル
+split: 
+  split_type: shuffle
+  valid_size: 0.2
+  test_size: 0.2
+features:
+  - group
+model:
+  model_name: lightgbm_regressor
+  params:
+    boosting_type: gbdt
+    objective: regression
+    metric: mse
+    num_leaves: 31
+    learning_rate: 0.1
+    n_estimators: 100000
+    random_state: 0
+post_process:
+mlflow: True
+experiment_name: lightgbm_comparison
+run_name: regressor_mse # 要変更
+model_save_path: model

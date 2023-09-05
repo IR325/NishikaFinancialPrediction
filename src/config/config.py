@@ -11,6 +11,9 @@ class Config:
     def __getitem__(self, key):
         return self.cfg[key]
 
+    def __setitem__(self, key, value):
+        self.cfg[key] = value
+
     def get_split_info(self):
         return (
             self.cfg["split"]["split_type"],
@@ -21,12 +24,15 @@ class Config:
     def get_model_info(self):
         return self.cfg["model"]["model_name"], self.cfg["model"]["params"]
 
-    def experiment_settings(self):
+    def get_experiment_settings(self):
         return (
             self.cfg["model"]["model_name"],
             self.cfg["model"]["params"],
-            self.cfg["features"],
+            self.cfg["features"] if self.cfg["features"] else [],
         )
+
+    def get_mlflow_settings(self):
+        return (self.cfg["experiment_name"], self.cfg["run_name"])
 
     def track_with_mlflow(self):
         return self.cfg["mlflow"]
@@ -34,5 +40,17 @@ class Config:
     def get_model_save_path(self):
         return self.cfg["model_save_path"]
 
-    def get_csv_save_path(self):
-        return self.cfg["csv_save_path"]
+    def get_test_save_path(self):
+        return self.cfg["test_csv_save_path"]
+
+    def get_eval_save_path(self):
+        return self.cfg["eval_csv_save_path"]
+
+    def get_post_process_settings(self):
+        if self.cfg["post_process"]:
+            return (
+                self.cfg["post_process"]["process_type"],
+                self.cfg["post_process"]["params"],
+            )
+        else:
+            return None, None

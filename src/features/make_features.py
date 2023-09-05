@@ -5,9 +5,10 @@ from data.make_dataset import Dataset
 
 
 def make_features(cfg: Config, ds: Dataset):
-    if "group" in cfg["features"]:
-        ds = _add_group_features(ds)
-    ds = _drop_id(ds)
+    if features := cfg["features"]:
+        if "group" in features:
+            ds = _add_group_features(ds)
+        ds = _drop_id(ds)
     return ds
 
 

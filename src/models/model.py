@@ -4,9 +4,6 @@ import sys
 import lightgbm as lgb
 import numpy as np
 
-sys.path.append(
-    "/Users/ryusuke/Downloads/study/data_competition/nishika_金融時系列予測/NishikaFinancialPrediction/src"
-)  # TODO: もっといい方法がありそう
 from config.config import Config
 
 

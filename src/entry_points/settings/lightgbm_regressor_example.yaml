@@ -14,7 +14,17 @@ model:
     learning_rate: 0.1
     n_estimators: 100000
     random_state: 0
-mlflow: True
+post_process:
+  process_type: number
+  params:
+    upper: 
+      limit: 10
+      value: 3
+    lower: 
+      limit: 10
+      value: -2
+mlflow: False
 run_name: 20230903_lightgbm_mse # 要変更
 model_save_path: model
-csv_save_path: ../../results/20230831_lightgbm_mse.csv # 要変更
+eval_csv_save_path: ../../results/20230903_lightgbm_mse_eval.csv # 要変更
+test_csv_save_path: ../../results/20230903_lightgbm_mse_test.csv # 要変更
