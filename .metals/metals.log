@@ -176,3 +176,12 @@ java.util.concurrent.TimeoutException
 8月 29, 2023 11:17:20 午前 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 警告: Unmatched cancel notification for request id 618
 2023.08.29 18:23:15 WARN  no build target for: /Users/ryusuke/Downloads/study/仕事関連/scala/chapter10/traversable.scala
+9月 04, 2023 9:34:01 午後 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+情報: Unsupported notification method: $/setTrace
+9月 04, 2023 9:34:16 午後 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+情報: Unsupported notification method: $/setTrace
+9月 04, 2023 9:42:32 午後 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+情報: Unsupported notification method: $/setTrace
+2023.09.04 21:44:31 INFO  Shutting down server
+2023.09.04 21:44:31 INFO  shutting down Metals
+2023.09.04 21:44:31 INFO  Exiting server

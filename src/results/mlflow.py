@@ -11,7 +11,6 @@ import mlflow
 DB_PATH = "../../mlflow/db/test.db"
 ARTIFACT_LOCATION = "../../mlflow"
 MODEL_LOCATION = os.path.join(ARTIFACT_LOCATION, "models")
-EXPERIMENT_NAME = "experiment_1"
 
 
 def save_with_mlflow(cfg, model, metrics):
@@ -20,16 +19,17 @@ def save_with_mlflow(cfg, model, metrics):
     mlflow.set_tracking_uri(tracking_uri)
 
     # Experimentの生成
-    experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
+    experiment_name, run_name = cfg.get_mlflow_settings()
+    experiment = mlflow.get_experiment_by_name(experiment_name)
     if experiment is None:
         experiment_id = mlflow.create_experiment(
-            name=EXPERIMENT_NAME,
+            name=experiment_name,
             artifact_location=ARTIFACT_LOCATION,
         )
     else:  # 当該Experiment存在するとき、IDを取得
         experiment_id = experiment.experiment_id
 
-    with mlflow.start_run(experiment_id=experiment_id, run_name=cfg["run_name"]) as run:
+    with mlflow.start_run(experiment_id=experiment_id, run_name=run_name) as run:
         # 実験条件の保存
         _log_params(cfg)
         # TODO: モデルの保存
@@ -42,7 +42,7 @@ def save_with_mlflow(cfg, model, metrics):
 
 def _log_params(cfg):
     """パラメータの保存"""
-    model_name, params, features = cfg.experiment_settings()
+    model_name, params, features = cfg.get_experiment_settings()
     mlflow.log_param("model_name", model_name)
     mlflow.log_params(params)
     for i, feature in enumerate(features):
@@ -54,7 +54,7 @@ def _log_metrics(metrics):
 
 
 def _log_model(cfg, model):
-    model_name, _, _ = cfg.experiment_settings()
+    model_name, _, _ = cfg.get_experiment_settings()
     save_path = cfg.get_model_save_path()
     if model_name == "lightgbm_classifier" or model_name == "lightgbm_regressor":
         mlflow.lightgbm.log_model(lgb_model=model, artifact_path=save_path)
@@ -63,4 +63,5 @@ def _log_model(cfg, model):
 
 
 def _log_results(cfg):
-    mlflow.log_artifact(cfg.get_csv_save_path())
+    mlflow.log_artifact(cfg.get_eval_save_path())
+    mlflow.log_artifact(cfg.get_test_save_path())
