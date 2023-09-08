@@ -4,6 +4,7 @@ data/
 results/
 mlflow/
 models/
+notebooks/
 experiments/mlruns/
 *.pyc
 !src/results/

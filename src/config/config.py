@@ -18,7 +18,9 @@ class Config:
         return (
             self.cfg["split"]["split_type"],
             self.cfg["split"]["valid_size"],
-            self.cfg["split"]["test_size"],
+            self.cfg["split"]["valid_random_state"],
+            self.cfg["split"]["eval_size"],
+            self.cfg["split"]["eval_random_state"],
         )
 
     def get_model_info(self):
