@@ -14,7 +14,7 @@ class Config:
     def __setitem__(self, key, value):
         self.cfg[key] = value
 
-    def get_split_info(self):
+    def get_split_settings(self):
         return (
             self.cfg["split"]["split_type"],
             self.cfg["split"]["valid_size"],
@@ -23,7 +23,7 @@ class Config:
             self.cfg["split"]["eval_random_state"],
         )
 
-    def get_model_info(self):
+    def get_model_settings(self):
         return self.cfg["model"]["model_name"], self.cfg["model"]["params"]
 
     def get_experiment_settings(self):
@@ -56,3 +56,14 @@ class Config:
             )
         else:
             return None, None
+
+    def get_feature_settings(self):
+        feat_settings = self.cfg["features"]
+        add_features = feat_settings.get("add", [])
+        del_features = feat_settings.get("delete", [])
+        if feat_settings.get("select", None):
+            select_method = feat_settings["select"]["method"]
+            select_params = feat_settings["select"]["params"]
+        else:
+            select_method, select_params = None
+        return add_features, del_features, select_method, select_params

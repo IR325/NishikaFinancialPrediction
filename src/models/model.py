@@ -9,7 +9,7 @@ from config.config import Config
 
 class Model:
     def __init__(self, cfg):
-        self.model_name, self.params = cfg.get_model_info()
+        self.model_name, self.params = cfg.get_model_settings()
         self.convert_dict = {}
         self.reverse_convert_dict = {}
 
@@ -60,14 +60,3 @@ class Model:
         elif self.model_name == "lightgbm_classifier":
             y_pred = self._convert_to_numerical(y_pred)
         return y_pred
-
-
-def train(cfg, X_train, y_train, X_valid, y_valid):
-    model = Model(cfg)
-    model.train(X_train, y_train, X_valid, y_valid)
-    return model
-
-
-def predict(model, X_pred):
-    y_pred = model.predict(X_pred)
-    return y_pred

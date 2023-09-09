@@ -1,9 +1,18 @@
 split: 
   split_type: shuffle
   valid_size: 0.2
-  test_size: 0.2
+  valid_random_state: 0
+  eval_size: 0.2
+  eval_random_state: 0
 features:
-  - group
+  add:
+    - group
+  delete:
+    - id
+  select:
+    method: selectkbest
+    params:
+      k: 5
 model:
   model_name: lightgbm_regressor
   params:
@@ -12,7 +21,7 @@ model:
     metric: mse
     num_leaves: 16
     learning_rate: 0.1
-    n_estimators: 100000
+    n_estimators: 10
     random_state: 0
 post_process:
   process_type: number
@@ -26,5 +35,5 @@ post_process:
 mlflow: False
 run_name: 20230903_lightgbm_mse # 要変更
 model_save_path: model
-eval_csv_save_path: ../../results/20230903_lightgbm_mse_eval.csv # 要変更
-test_csv_save_path: ../../results/20230903_lightgbm_mse_test.csv # 要変更
+eval_csv_save_path: ../../results/test_20230909_eval.csv # 要変更
+test_csv_save_path: ../../results/test_20230909_test.csv # 要変更
