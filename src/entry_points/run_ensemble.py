@@ -30,7 +30,7 @@ def ensemble_preds(preds:np.ndarray):
     """
     return np.mean(preds, axis=0)
 
-# TODO: 各学習器共通の設定と個別の設定をどう分けるか
+# TODO: 各学習器共通の設定と個別の設定をどう分けるか(SlidingWindowとかどうしてたっけ)
 def run_ensemble(ecfg: EnsembleConfig):
     eval_preds, test_preds = ecfg.empty_arrays()
     # 各cfgに則って予測を行う
