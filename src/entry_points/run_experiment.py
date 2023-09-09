@@ -1,4 +1,4 @@
-"""LightGBMのn_estimatorsの値による精度の違いを確認する."""
+"""基本的な実験用スクリプト."""
 
 import argparse
 import time
@@ -20,6 +20,12 @@ DATA_PATH = "../../data"
 RESULT_PATH = "../results"
 
 
+def load_data(data_path):
+    train_data = pd.read_parquet(Path(data_path, "train.parquet"))
+    test_data = pd.read_parquet(Path(data_path, "test.parquet"))
+    return train_data, test_data
+
+
 def train(cfg, X_train, y_train, X_valid, y_valid):
     model = Model(cfg)
     model.train(X_train, y_train, X_valid, y_valid)
@@ -33,10 +39,9 @@ def predict(model, X_pred):
 
 def run_experiment(cfg):
     # データ読み込み
-    train_data = pd.read_parquet(Path(DATA_PATH, "train.parquet"))
-    test_data = pd.read_parquet(Path(DATA_PATH, "test.parquet"))
+    train_data, test_data = load_data(DATA_PATH)
     # データ分割
-    ds = split_data(cfg, train_data, test_data)
+    ds = split_data(**cfg.get_split_settings(), train_data, test_data)
     # 特徴量選択・作成
     ds = process_features(cfg, ds)
     # モデル作成
