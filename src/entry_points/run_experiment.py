@@ -1,8 +1,6 @@
 """LightGBMのn_estimatorsの値による精度の違いを確認する."""
 
 import argparse
-import pickle
-import sys
 import time
 from pathlib import Path
 
@@ -11,15 +9,26 @@ import pandas as pd
 
 from config.config import Config
 from data.make_dataset import split_data
-from features.make_features import make_features
+from features.features import process_features
 from metrics.metrics import cosine_similarity
-from models.model import predict, train
+from models.model import Model
 from post_process.post_process import post_process
 from results.mlflow import save_with_mlflow
 from results.save_result import save_results
 
 DATA_PATH = "../../data"
 RESULT_PATH = "../results"
+
+
+def train(cfg, X_train, y_train, X_valid, y_valid):
+    model = Model(cfg)
+    model.train(X_train, y_train, X_valid, y_valid)
+    return model
+
+
+def predict(model, X_pred):
+    y_pred = model.predict(X_pred)
+    return y_pred
 
 
 def run_experiment(cfg):
@@ -29,7 +38,7 @@ def run_experiment(cfg):
     # データ分割
     ds = split_data(cfg, train_data, test_data)
     # 特徴量選択・作成
-    ds = make_features(cfg, ds)
+    ds = process_features(cfg, ds)
     # モデル作成
     model = train(cfg, ds.X_train, ds.y_train, ds.X_valid, ds.y_valid)
     # 予測

@@ -32,7 +32,7 @@ def save_with_mlflow(cfg, model, metrics):
     with mlflow.start_run(experiment_id=experiment_id, run_name=run_name) as run:
         # 実験条件の保存
         _log_params(cfg)
-        # TODO: モデルの保存
+        # モデルの保存
         _log_model(cfg, model)
         # 精度の保存
         _log_metrics(metrics)
@@ -42,11 +42,23 @@ def save_with_mlflow(cfg, model, metrics):
 
 def _log_params(cfg):
     """パラメータの保存"""
-    model_name, params, features = cfg.get_experiment_settings()
+    # モデル関連
+    model_name, params = cfg.get_model_settings()
     mlflow.log_param("model_name", model_name)
     mlflow.log_params(params)
-    for i, feature in enumerate(features):
-        mlflow.log_param(f"feature_{i}", feature)
+    # 特徴量関連
+    (
+        add_features,
+        del_features,
+        select_method,
+        select_params,
+    ) = cfg.get_feature_settings()
+    for i, feature in enumerate(add_features):
+        mlflow.log_param(f"add_feature_{i+1}", feature)
+    for i, feature in enumerate(del_features):
+        mlflow.log_param(f"del_feature_{i+1}", feature)
+    mlflow.log_param("select_method", select_method)
+    mlflow.log_params(select_params)
 
 
 def _log_metrics(metrics):
