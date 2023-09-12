@@ -57,8 +57,9 @@ def _log_params(cfg):
         mlflow.log_param(f"add_feature_{i+1}", feature)
     for i, feature in enumerate(del_features):
         mlflow.log_param(f"del_feature_{i+1}", feature)
-    mlflow.log_param("select_method", select_method)
-    mlflow.log_params(select_params)
+    if select_method and select_params:
+        mlflow.log_param("select_method", select_method)
+        mlflow.log_params(select_params)
 
 
 def _log_metrics(metrics):
