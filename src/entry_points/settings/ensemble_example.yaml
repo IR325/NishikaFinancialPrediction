@@ -1,0 +1,6 @@
+split: 
+  split_type: shuffle
+  valid_size: 0.1
+  test_size: 0.1
+eval_csv_save_path: ../../results/eval_ensemble.csv # 要変更
+test_csv_save_path: ../../results/test_ensemble.csv # 要変更

@@ -15,13 +15,7 @@ class Config:
         self.cfg[key] = value
 
     def get_split_settings(self):
-        return (
-            self.cfg["split"]["split_type"],
-            self.cfg["split"]["valid_size"],
-            self.cfg["split"]["valid_random_state"],
-            self.cfg["split"]["eval_size"],
-            self.cfg["split"]["eval_random_state"],
-        )
+        return self.cfg["split"]
 
     def get_model_settings(self):
         return self.cfg["model"]["model_name"], self.cfg["model"]["params"]
@@ -65,5 +59,5 @@ class Config:
             select_method = feat_settings["select"]["method"]
             select_params = feat_settings["select"]["params"]
         else:
-            select_method, select_params = None
+            select_method, select_params = None, None
         return add_features, del_features, select_method, select_params

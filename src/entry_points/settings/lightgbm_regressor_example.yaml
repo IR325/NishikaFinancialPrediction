@@ -24,16 +24,17 @@ model:
     n_estimators: 10
     random_state: 0
 post_process:
-  process_type: number
-  params:
-    upper: 
-      limit: 10
-      value: 3
-    lower: 
-      limit: 10
-      value: -2
-mlflow: False
-run_name: 20230903_lightgbm_mse # 要変更
+  # process_type: number
+  # params:
+  #   upper: 
+  #     limit: 10
+  #     value: 3
+  #   lower: 
+  #     limit: 10
+  #     value: -2
+mlflow: True
+experiment_name: 20230911_test
+run_name: test # 要変更
 model_save_path: model
 eval_csv_save_path: ../../results/test_20230909_eval.csv # 要変更
 test_csv_save_path: ../../results/test_20230909_test.csv # 要変更

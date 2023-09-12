@@ -35,11 +35,14 @@ def delete_features(ds, features_to_del):
 
 
 def _get_select_columns(X, y, select_method, select_params):
-    if select_method.lower() == "selectkbest":
-        # selectorの学習
-        selector = SelectKBest(score_func=f_regression, **select_params)
-        selector.fit(X, y)
-        selected_cols = X.columns[selector.get_support()]
+    if select_method and select_params:
+        if select_method.lower() == "selectkbest":
+            # selectorの学習
+            selector = SelectKBest(score_func=f_regression, **select_params)
+            selector.fit(X, y)
+            selected_cols = X.columns[selector.get_support()]
+    else:
+        selected_cols = X.columns
     return selected_cols
 
 
