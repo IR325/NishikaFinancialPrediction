@@ -65,5 +65,5 @@ class Config:
             select_method = feat_settings["select"]["method"]
             select_params = feat_settings["select"]["params"]
         else:
-            select_method, select_params = None
+            select_method, select_params = None, None
         return add_features, del_features, select_method, select_params
